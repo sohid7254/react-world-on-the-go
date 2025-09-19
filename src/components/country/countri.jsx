@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './countri.css'
 
-const Country = ({ country }) => {
-    const [visited, setVisited] = useState(false)
+const Country = ({ country, handleVisitedCountries, handleVisitedFlags }) => {
+    const [visited, setVisited] = useState(false);
+
     const handleClicked = () => {
         // Bassic Operator
         // if(visited){
@@ -14,12 +15,13 @@ const Country = ({ country }) => {
         // Second MEthod
         // setVisited(visited ? false ; true);
 
-        setVisited(!visited)
-    }
+        setVisited(!visited);
+        handleVisitedCountries(country);
+    };
     return (
         // Conditionally class added
         // <div className={`countri ${visited? "countri-visited": "countri-not-visited"}`}>
-        <div className={`countri ${visited && 'countri-visitedj'}`}>
+        <div className={`countri ${visited && "countri-visited"}`}>
             <img src={country.flags.flags.png} alt={country.flags.flags.alt} />
             <h3>Name: {country.name.common}</h3>
             <p>Population: {country.population.population}</p>
@@ -36,6 +38,7 @@ const Country = ({ country }) => {
                 </div>
             ))}
             <button onClick={handleClicked}>{visited ? "Visited" : "Not Visited"}</button>
+            <button onClick={() => {handleVisitedFlags(country.flags.flags.png)}}>Add Visited Flag</button>
         </div>
     );
 };
