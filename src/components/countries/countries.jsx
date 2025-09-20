@@ -6,9 +6,15 @@ const Countries = ({ countriesPromise }) => {
     const [visitedCountries, setVisitedCountries] = useState([]);
     const [visitedFlags, setVisitedFlags] = useState([]);
     const handleVisitedCountries = (country) => {
-        console.log("handle visited country clicked", country);
-        const newVisitedCountries = [...visitedCountries, country]
-        setVisitedCountries(newVisitedCountries);
+        if (visitedCountries.includes(country)){
+            let filterCountry = visitedCountries.filter((c) => c != country);
+            setVisitedCountries(filterCountry)
+        }else {
+            const newVisitedCountries = [...visitedCountries, country];
+            const filterVisited = [...new Set(newVisitedCountries)]
+            setVisitedCountries(filterVisited);
+        }
+        
     };
 
     const handleVisitedFlags = (flag) => {
